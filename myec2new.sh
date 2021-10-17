@@ -9,9 +9,9 @@ pipeline {
 
         stage ('CreateEnv') {
             steps {
-                script {
-                    sh "chmod +x -R ${env.WORKSPACE}/../${env.JOB_NAME}/myec2.sh"
-                }
+                sh '''#!/bin/bash
+                        aws ec2 run-instances --image-id ami-074cce78125f09d61 --count 1 --instance-type t2.micro --key-name DevOps21 --region us-east-2
+                '''
             }
         }
     }
